@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taff Nova Login & Signup</title>
+    <style>
+        body {
+            
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s;
+            background-image: url('img/traf.jpg'); 
+            background-size: cover; 
+            background-position: center;
+        }
+
+        .container {
+            background: #1e1d1d;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            height: 340px;
+            transition: background 0.3s;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-toggle {
+            
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .toggle-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-weight: bold;
+            color: #ffffff;
+            transition: color 0.3s;
+            background-color: #2a2a2a;
+            width:144px
+        }
+
+        .toggle-button:hover {
+            color: #00bcd4;
+        }
+
+        .form {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .form.active {
+            display: block;
+            opacity: 1;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 92%;
+            background-color: #2a2a2a;
+            color: #ffffff;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #00bcd4;
+            outline: none;
+        }
+
+        button {
+            
+            padding: 10px;
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0097a7;
+        }
+
+        .message {
+            margin-top: 10px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .password-strength {
+            margin: 5px 0;
+            height: 5px;
+            border-radius: 4px;
+        }
+
+        .strength-weak {
+            background-color: red;
+        }
+
+        .strength-medium {
+            background-color: orange;
+        }
+
+        .strength-strong {
+            background-color: green;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        
+        <div class="form-container">
+            <div class="form-toggle">
+                <button id="loginBtn" class="toggle-button" >Login</button>
+                <button id="signupBtn" class="toggle-button">Signup</button>
+            </div>
+            <form id="loginForm" class="form active" onsubmit="return validateLogin()" >
+                <h2>Login</h2>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" style="margin-top: 30px;">Login</button>
+                <p class="message" >Not registered? <span id="switchToSignup" style="cursor: pointer;">Create an account</span></p>
+                <div id="loginError" class="error"></div>
+            </form>
+            <form id="signupForm" class="form" onsubmit="return validateSignup()">
+                <h2>Signup</h2>
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="email" id="signupEmail" placeholder="Email" required>
+                <input type="password" id="signupPassword" placeholder="Password" required oninput="checkPasswordStrength()">
+                <div class="password-strength" id="passwordStrength"></div>
+                <button type="submit">Signup</button>
+                <p class="message">Already registered? <span id="switchToLogin" style="cursor: pointer;">Login</span></p>
+                <div id="signupError" class="error"></div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById("loginForm");
+            const signupForm = document.getElementById("signupForm");
+            const loginBtn = document.getElementById("loginBtn");
+            const signupBtn = document.getElementById("signupBtn");
+            const switchToSignup = document.getElementById("switchToSignup");
+            const switchToLogin = document.getElementById("switchToLogin");
+
+            // Show the login form and hide the signup form
+            loginBtn.addEventListener("click", function() {
+                loginForm.classList.add("active");
+                signupForm.classList.remove("active");
+                clearErrors();
+            });
+
+            // Show the signup form and hide the login form
+            signupBtn.addEventListener("click", function() {
+                signupForm.classList.add("active");
+                loginForm.classList.remove("active");
+                clearErrors();
+            });
+
+            // Switch to signup form when the link is clicked
+            switchToSignup.addEventListener("click", function() {
+                signupForm.classList.add("active");
+                loginForm.classList.remove("active");
+                clearErrors();
+            });
+
+            // Switch to login form when the link is clicked
+            switchToLogin.addEventListener("click", function() {
+                loginForm.classList.add("active");
+                signupForm.classList.remove("active");
+                clearErrors();
+            });
+        });
+
+        function clearErrors() {
+            document.getElementById("loginError").innerText = "";
+            document.getElementById("signupError").innerText = "";
+        }
+
+        function validateLogin() {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            const errorElement = document.getElementById("loginError");
+
+            if (!email || !password) {
+                errorElement.innerText = "Please fill in all fields.";
+                return false;
+            }
+
+            // Simulate a successful login
+            alert("Login successful!");
+            return false; // Prevent form submission for demo purposes
+        }
+
+        function validateSignup() {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+            const errorElement = document.getElementById("signupError");
+
+            if (!username || !email || !password) {
+                errorElement.innerText = "Please fill in all fields.";
+                return false;
+            }
+
+            // Simulate a successful signup
+            alert("Signup successful!");
+            return false; // Prevent form submission for demo purposes
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById("signupPassword").value;
+            const strengthIndicator = document.getElementById("passwordStrength");
+            strengthIndicator.className = "password-strength"; // Reset class
+
+            if (password.length < 6) {
+                strengthIndicator.classList.add("strength-weak");
+                strengthIndicator.style.width = "33%";
+            } else if (password.length < 10) {
+                strengthIndicator.classList.add("strength-medium");
+                strengthIndicator.style.width = "66%";
+            } else {
+                strengthIndicator.classList.add("strength-strong");
+                strengthIndicator.style.width = "100%";
+            }
+        }
+    </script>
+</body>
+</html>

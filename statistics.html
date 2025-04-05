@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Jersey 25' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jura">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraffNova.com</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #2d2d2d;
+            color: white;
+        }
+        .header {
+            background-color: #1a1a1a;
+        }
+        .nav-bar {
+            background-color: #454444;
+        }
+        .nav-bar a {
+            color: #b3b3b3;
+        }
+        .nav-bar a:hover {
+            color: yellow;
+        }
+        .main-content {
+            
+            padding: 2rem;
+            border-radius: 0.5rem;
+            
+            
+        }
+        .main-content video {
+            
+            position: absolute;
+            top: 120px;
+            right:0;
+            bottom:0;
+
+            width: 1525px;
+            height: 500px;
+            object-fit: cover; /* Cover the entire container */
+            z-index: -1; /* Set z-index to be behind the image */
+            border-radius: 0.5rem;
+        }
+        .main-content img {
+
+            border-radius: 0.5rem;
+        }
+    
+        .btn-custom {
+            background-color: #00b3b3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="header p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <a href="index.html"><img src="img/logo.png" alt="Logo" width="50" height="50" class="me-3"></a>
+            <h1 class="h4 mb-0"  >TRAFF NOVA</h1>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="login.html"><i class="fas fa-user me-3"></i></a>
+            <i class="fas fa-shopping-cart me-3"></i>
+            <i class="fas fa-globe me-3"></i>
+            <i class="fas fa-search"></i>
+        </div>
+    </header>
+    
+    <nav class="nav-bar p-2">
+   
+        <div class="container d-flex justify-content-center">
+            <a href="liveMap.html" class="nav-link px-3">LIVE MAP</a>
+            <a href="alerts.html" class="nav-link px-3">ALERTS</a>
+            <a href="statistics.html" class="nav-link px-3">STATISTICS</a>
+            <a href="priority.html" class="nav-link px-3">PRIORITY</a>
+            <a href="support.html" class="nav-link px-3">SUPPORT</a>
+            <a href="news.html" class="nav-link px-3">NEWS</a>
+            <a href="about.html" class="nav-link px-3">ABOUT</a>
+        </div>
+        
+    </nav>
+    
+    <main class="container ">
+        
+        <div class="main-content text-center">
+            <video autoplay muted loop plays-inline class="background -clip">
+                <source src="videoplayback2.webm" type="video/mp4" > <!-- Replace with your video file -->
+                Your browser does not support the video tag.
+            </video>
+            
+        </div>
+        <div class="mt-8 flex justify-between items-start">
+            <h3 class="text-4xl font-bold" style="font-family: 'Jura'; font-size: 40px; color: #c9c7c7; letter-spacing: 2px; margin-top: 480px; margin-bottom: 30px;">Real-Time Traffic Monitoring</h3>
+            
+            <p class="ml-8 text-gray-400" style="max-width: 700px; color: #c9c7c7; font-family: 'Jersey 25';font-size: 20px; " >
+                AI-powered cameras detect and classify vehicles, pedestrians, and cyclists.
+            </p>
+            <p class="mt-2" style="max-width: 700px; color: #c9c7c7; font-family: 'Jersey 25';font-size: 20px; ">Thermal and visible sensors equipped with AI detect approaching vehicles, cyclists, and pedestrians without the need for pre-configured zones. Reliably control intersections and gather valuable positioning, speed, and heading data for a comprehensive, continuous view of your roadways.</p>
+            <a href="support.html"><button class="btn btn-custom mt-4" style="margin-bottom: 30px;">CONTACT AN EXPERT</button></a>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
